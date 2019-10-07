@@ -20,15 +20,15 @@ An oracle framework with zero knowledge proof
 
 | name | type | detail |
 | :--: | :--: | :--: |
-| secret | bytes | The secret |
+| secret | `bytes` | The secret |
 | oracle | `address[]` | The address of the granted oracle |
 
 ##### Return
 
 | type | detail |
 | :--: | :--: |
-| uint8 | errno |
-| bytes32 | `keccak256(secret)` |
+| `uint8` | errno |
+| `bytes32` | `keccak256(secret)` |
 
 #### Remove secret 
 
@@ -38,14 +38,14 @@ An oracle framework with zero knowledge proof
 
 | name | type | detail |
 | :--: | :--: | :--: |
-| secret_hash | bytes32 | The hash of the secret |
+| secret_hash | `bytes32` | The hash of the secret |
 | oracle | `address[]` | The address of the granted oracle |
 
 ##### Return
 
 | type | detail |
 | :--: | :--: |
-| uint8 | errno |
+| `uint8` | errno |
 
 #### Grant access
 
@@ -63,7 +63,7 @@ An oracle framework with zero knowledge proof
 
 | type | detail |
 | :--: | :--: |
-| uint8 | errno |
+| `uint8` | errno |
 
 ### Circuit
 
@@ -73,14 +73,14 @@ An oracle framework with zero knowledge proof
 
 | name | type | detail |
 | :--: | :--: | :--: |
-| circuit | bytes | The circuit |
+| circuit | `bytes` | The circuit |
 
 ##### Return
 
 | type | detail |
 | :--: | :--: |
-| uint8 | errno |
-| bytes32 | `keccak256(circuit)` |
+| `uint8` | errno |
+| `bytes32` | `keccak256(circuit)` |
 
 #### Remove circuit 
 
@@ -90,13 +90,13 @@ An oracle framework with zero knowledge proof
 
 | name | type | detail |
 | :--: | :--: | :--: |
-| circuit_hash | bytes32 | The hash of the circuit |
+| circuit_hash | `bytes32` | The hash of the circuit |
 
 ##### Return
 
 | type | detail |
 | :--: | :--: |
-| uint8 | errno |
+| `uint8` | errno |
 
 ### Compute
 
@@ -106,14 +106,14 @@ An oracle framework with zero knowledge proof
 
 | name | type | detail |
 | :--: | :--: | :--: |
-| circuit_hash | bytes32 | The hash of the circuit |
-| secret_hashes | byte32[] | The array of secret hashes |
+| circuit_hash | `bytes32` | The hash of the circuit |
+| secret_hashes | `byte32[]` | The array of secret hashes |
 
 ##### Return
 
 | type | detail |
 | :--: | :--: |
-| uint8 | Success or not |
+| `uint8` | Success or not |
 
 ### Oracle
 
@@ -128,7 +128,7 @@ An oracle framework with zero knowledge proof
 
 | type | detail |
 | :--: | :--: |
-| uint8 | errno |
+| `uint8` | errno |
 
 #### Retire
 
@@ -141,7 +141,7 @@ An oracle framework with zero knowledge proof
 
 | type | detail |
 | :--: | :--: |
-| uint8 | errno |
+| `uint8` | errno |
 
 ### Return values
 
