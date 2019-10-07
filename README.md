@@ -16,11 +16,12 @@ An oracle framework with zero knowledge proof
 
 #### Create secret
 
-`function secret_create(bytes secret) public returns (uint8, bytes32)`
+`function secret_create(bytes secret, address[] oracle) public returns (uint8, bytes32)`
 
 | name | type | detail |
 | :--: | :--: | :--: |
 | secret | bytes | The secret |
+| oracle | `address[]` | The address of the granted oracle |
 
 ##### Return
 
@@ -31,13 +32,14 @@ An oracle framework with zero knowledge proof
 
 #### Remove secret 
 
-`function secret_remove(bytes32 secret_hash) public returns (uint8)`
+`function secret_remove(bytes32 secret_hash, address[] oracle) public returns (uint8)`
 
 * This function can only be called by the creator of the secret.
 
 | name | type | detail |
 | :--: | :--: | :--: |
 | secret_hash | bytes32 | The hash of the secret |
+| oracle | `address[]` | The address of the granted oracle |
 
 ##### Return
 
@@ -45,33 +47,17 @@ An oracle framework with zero knowledge proof
 | :--: | :--: |
 | uint8 | errno |
 
-#### Grant access to user
+#### Grant access
 
-`function secret_grant_user(bytes32 secret_hash, address[] user) public returns (uint8)`
-
-* This function can only be called by the creator of the secret.
-
-| name | type | detail |
-| :--: | :--: | :--: |
-| secret_hash | bytes32 | The hash of the secret |
-| user | address | The address of the granted user |
-
-##### Return
-
-| type | detail |
-| :--: | :--: |
-| uint8 | errno |
-
-#### Grant access to oracle
-
-`function secret_grant_oracle(bytes32 secret_hash, address[] oracle) public returns (uint8)`
+`function secret_grant_user(bytes32 secret_hash, address[] user, address[] oracle) public returns (uint8)`
 
 * This function can only be called by the creator of the secret.
 
 | name | type | detail |
 | :--: | :--: | :--: |
-| secret_hash | bytes32 | The hash of the secret |
-| user | address | The address of the granted oracle |
+| secret_hash | `bytes32` | The hash of the secret |
+| user | `address[]` | The address of the granted user |
+| oracle | `address[]` | The address of the granted oracle |
 
 ##### Return
 
@@ -133,7 +119,20 @@ An oracle framework with zero knowledge proof
 
 #### Register
 
-`function register() public returns (uint8)`
+`function oracle_register() public returns (uint8)`
+
+| name | type | detail |
+| :--: | :--: | :--: |
+
+##### Return
+
+| type | detail |
+| :--: | :--: |
+| uint8 | errno |
+
+#### Retire
+
+`function oracle_retire() public returns (uint8)`
 
 | name | type | detail |
 | :--: | :--: | :--: |
