@@ -7,5 +7,13 @@ An oracle framework with zero knowledge proof
 
 ## APIs
 
-* 
+### Secret
+
+* Create secret
+* Delete secret
+
+### Circuit
+
+* Create circuit
+* Delete circuit
 
