@@ -10,7 +10,7 @@ An oracle framework with zero knowledge proof
 * Truffle >=
 * Solidity >=
 
-## APIs
+## Usages
 
 ### Secret
 
