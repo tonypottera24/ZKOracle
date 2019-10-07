@@ -7,7 +7,8 @@ An oracle framework with zero knowledge proof
 
 ## Dependencies
 
-* Truffle
+* Truffle >=
+* Solidity >=
 
 ## APIs
 ### Secret
@@ -46,10 +47,12 @@ An oracle framework with zero knowledge proof
 ### Circuit
 #### Create circuit 
 
-`function circuit_create() public`
+`function circuit_create(bytes circuit) public returns (bytes32)`
 
 | name | type | detail |
 | :--: | :--: | :--: |
+| circuit | bytes | The circuit |
+| return | bytes32 | `keccak256(circuit)` |
 
 #### Remove circuit 
 
