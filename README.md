@@ -11,15 +11,23 @@ An oracle framework with zero knowledge proof
 * Solidity >=
 
 ## APIs
+
 ### Secret
+
 #### Create secret
 
-`function secret_create(bytes secret) public returns (bytes32)`
+`function secret_create(bytes secret) public returns (uint8, bytes32)`
 
-|name|type|detail|
-|:--:|:--:|:--:|
+| name | type | detail |
+| :--: | :--: | :--: |
 | secret | bytes | The secret |
-| return | bytes32 | `keccak256(secret)` |
+
+##### Return
+
+| type | detail |
+| :--: | :--: |
+| uint8 | errno |
+| bytes32 | `keccak256(secret)` |
 
 #### Remove secret 
 
@@ -30,9 +38,14 @@ An oracle framework with zero knowledge proof
 | name | type | detail |
 | :--: | :--: | :--: |
 | secret_hash | bytes32 | The hash of the secret |
-| return | uint8 |  |
 
-#### Grant access 
+##### Return
+
+| type | detail |
+| :--: | :--: |
+| uint8 | errno |
+
+#### Grant access
 
 `function secret_grant(bytes32 secret_hash, address user) public returns (uint8)`
 
@@ -42,17 +55,29 @@ An oracle framework with zero knowledge proof
 | :--: | :--: | :--: |
 | secret_hash | bytes32 | The hash of the secret |
 | user | address | The address of the granted user |
-| return | uint8 | Success or not |
+
+##### Return
+
+| type | detail |
+| :--: | :--: |
+| uint8 | errno |
 
 ### Circuit
+
 #### Create circuit 
 
-`function circuit_create(bytes circuit) public returns (bytes32)`
+`function circuit_create(bytes circuit) public returns (uint8, bytes32)`
 
 | name | type | detail |
 | :--: | :--: | :--: |
 | circuit | bytes | The circuit |
-| return | bytes32 | `keccak256(circuit)` |
+
+##### Return
+
+| type | detail |
+| :--: | :--: |
+| uint8 | errno |
+| bytes32 | `keccak256(circuit)` |
 
 #### Remove circuit 
 
@@ -63,21 +88,46 @@ An oracle framework with zero knowledge proof
 | name | type | detail |
 | :--: | :--: | :--: |
 | circuit_hash | bytes32 | The hash of the circuit |
-| return | uint8 | Success or not |
 
-#### Grant access 
+##### Return
 
-`function circuit_grant(bytes32 secret_hash, address user) public returns (uint8)`
+| type | detail |
+| :--: | :--: |
+| uint8 | errno |
 
-* This function can only be called by the creator of the circuit.
+### Compute
+
+#### Compute
+
+`function compute(bytes32 circuit_hash, bytes secret_hashes) public returns (uint8)`
 
 | name | type | detail |
 | :--: | :--: | :--: |
 | circuit_hash | bytes32 | The hash of the circuit |
-| user | address | The address of the granted user |
-| return | uint8 | Success or not |
+| secret_hashes | bytes | The hashes of the secrets |
 
-### Return value
+##### Return
+
+| type | detail |
+| :--: | :--: |
+| uint8 | Success or not |
+
+### Oracle
+
+#### Register
+
+`function register() public returns (uint8)`
+
+| name | type | detail |
+| :--: | :--: | :--: |
+
+##### Return
+
+| type | detail |
+| :--: | :--: |
+| uint8 | errno |
+
+### Return values
 
 | name | detail |
 | :--: | :--: |
