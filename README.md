@@ -19,14 +19,14 @@ An oracle framework with zero knowledge proof
 `function secret_create(bytes secret, address[] oracle) public returns (uint8, bytes32)`
 
 | name | type | detail |
-| :--: | :--: | :--: |
+| :-- | :-- | :-- |
 | secret | `bytes` | The secret |
 | oracle | `address[]` | The address of the granted oracle |
 
 ##### Return
 
 | type | detail |
-| :--: | :--: |
+| :-- | :-- |
 | `uint8` | errno |
 | `bytes32` | `keccak256(secret)` |
 
@@ -37,14 +37,14 @@ An oracle framework with zero knowledge proof
 * This function can only be called by the creator of the secret.
 
 | name | type | detail |
-| :--: | :--: | :--: |
+| :-- | :-- | :-- |
 | secret_hash | `bytes32` | The hash of the secret |
 | oracle | `address[]` | The address of the granted oracle |
 
 ##### Return
 
 | type | detail |
-| :--: | :--: |
+| :-- | :-- |
 | `uint8` | errno |
 
 #### Grant access
@@ -54,7 +54,7 @@ An oracle framework with zero knowledge proof
 * This function can only be called by the creator of the secret.
 
 | name | type | detail |
-| :--: | :--: | :--: |
+| :-- | :-- | :-- |
 | secret_hash | `bytes32` | The hash of the secret |
 | user | `address[]` | The address of the granted user |
 | oracle | `address[]` | The address of the granted oracle |
@@ -62,7 +62,7 @@ An oracle framework with zero knowledge proof
 ##### Return
 
 | type | detail |
-| :--: | :--: |
+| :-- | :-- |
 | `uint8` | errno |
 
 ### Circuit
@@ -72,13 +72,13 @@ An oracle framework with zero knowledge proof
 `function circuit_create(bytes circuit) public returns (uint8, bytes32)`
 
 | name | type | detail |
-| :--: | :--: | :--: |
+| :-- | :-- | :-- |
 | circuit | `bytes` | The circuit |
 
 ##### Return
 
 | type | detail |
-| :--: | :--: |
+| :-- | :-- |
 | `uint8` | errno |
 | `bytes32` | `keccak256(circuit)` |
 
@@ -89,13 +89,13 @@ An oracle framework with zero knowledge proof
 * This function can only be called by the creator of the circuit.
 
 | name | type | detail |
-| :--: | :--: | :--: |
+| :-- | :-- | :-- |
 | circuit_hash | `bytes32` | The hash of the circuit |
 
 ##### Return
 
 | type | detail |
-| :--: | :--: |
+| :-- | :-- |
 | `uint8` | errno |
 
 ### Compute
@@ -105,14 +105,14 @@ An oracle framework with zero knowledge proof
 `function compute(bytes32 circuit_hash, byte32[] secret_hashes) public returns (uint8)`
 
 | name | type | detail |
-| :--: | :--: | :--: |
+| :-- | :-- | :-- |
 | circuit_hash | `bytes32` | The hash of the circuit |
 | secret_hashes | `byte32[]` | The array of secret hashes |
 
 ##### Return
 
 | type | detail |
-| :--: | :--: |
+| :-- | :-- |
 | `uint8` | Success or not |
 
 ### Oracle
@@ -122,12 +122,12 @@ An oracle framework with zero knowledge proof
 `function oracle_register() public returns (uint8)`
 
 | name | type | detail |
-| :--: | :--: | :--: |
+| :-- | :-- | :-- |
 
 ##### Return
 
 | type | detail |
-| :--: | :--: |
+| :-- | :-- |
 | `uint8` | errno |
 
 #### Retire
@@ -135,17 +135,17 @@ An oracle framework with zero knowledge proof
 `function oracle_retire() public returns (uint8)`
 
 | name | type | detail |
-| :--: | :--: | :--: |
+| :-- | :-- | :-- |
 
 ##### Return
 
 | type | detail |
-| :--: | :--: |
+| :-- | :-- |
 | `uint8` | errno |
 
 ### Return values
 
 | name | detail |
-| :--: | :--: |
+| :-- | :-- |
 | SUCCESS | The operation successfully |
 | EACCESS |  |
