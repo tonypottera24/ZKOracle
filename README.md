@@ -5,52 +5,71 @@ An oracle framework with zero knowledge proof
 
 * 
 
+## Dependencies
+
+* Truffle
+
 ## APIs
 ### Secret
-* Create secret
+#### Create secret
 
-`function secret_create(secret, ) public returns ()`
+`function secret_create(bytes secret) public returns (bytes32)`
 
-|args|detail|
-|:--:|:--:|
-|secret|encrypted secret|
+|name|type|detail|
+|:--:|:--:|:--:|
+| secret | bytes | The secret |
+| return | bytes32 | `keccak256(secret)` |
 
-return: `hash(secret)`
+#### Remove secret 
 
-* Remove secret 
+`function secret_remove(bytes32 secret_hash) public returns (bool)`
 
-`function secret_remove() public`
+* This function can only be called by the creator of the secret.
 
-|arg|detail|
-|:--:|:--:|
+| name | type | detail |
+| :--: | :--: | :--: |
+| secret_hash | bytes32 | The hash of the secret |
+| return | bool | Success or not |
 
-#### Priviledge
-* Grant access 
+#### Grant access 
 
-`function secret_grant() public`
+`function secret_grant(bytes32 secret_hash, address user) public returns (bool)`
 
-|arg|detail|
-|:--:|:--:|
+* This function can only be called by the creator of the secret.
+
+| name | type | detail |
+| :--: | :--: | :--: |
+| secret_hash | bytes32 | The hash of the secret |
+| user | address | The address of the granted user |
+| return | bool | Success or not |
 
 ### Circuit
-* Create circuit 
+#### Create circuit 
 
 `function circuit_create() public`
 
-|arg|detail|
-|:--:|:--:|
+| name | type | detail |
+| :--: | :--: | :--: |
 
-* Remove circuit 
+#### Remove circuit 
 
-`function circuit_remove() public`
+`function circuit_remove(bytes32 circuit_hash) public returns (bool)`
 
-|arg|detail|
-|:--:|:--:|
+* This function can only be called by the creator of the circuit.
 
-#### Priviledge
-* Grant access 
+| name | type | detail |
+| :--: | :--: | :--: |
+| circuit_hash | bytes32 | The hash of the circuit |
+| return | bool | Success or not |
 
-`function circuit_grant() public`
+#### Grant access 
 
-|arg|detail|
-|:--:|:--:|
+`function circuit_grant(bytes32 secret_hash, address user) public returns (bool)`
+
+* This function can only be called by the creator of the circuit.
+
+| name | type | detail |
+| :--: | :--: | :--: |
+| circuit_hash | bytes32 | The hash of the circuit |
+| user | address | The address of the granted user |
+| return | bool | Success or not |
