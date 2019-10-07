@@ -45,9 +45,9 @@ An oracle framework with zero knowledge proof
 | :--: | :--: |
 | uint8 | errno |
 
-#### Grant access
+#### Grant access to user
 
-`function secret_grant(bytes32 secret_hash, address user) public returns (uint8)`
+`function secret_grant_user(bytes32 secret_hash, address[] user) public returns (uint8)`
 
 * This function can only be called by the creator of the secret.
 
@@ -55,6 +55,23 @@ An oracle framework with zero knowledge proof
 | :--: | :--: | :--: |
 | secret_hash | bytes32 | The hash of the secret |
 | user | address | The address of the granted user |
+
+##### Return
+
+| type | detail |
+| :--: | :--: |
+| uint8 | errno |
+
+#### Grant access to oracle
+
+`function secret_grant_oracle(bytes32 secret_hash, address[] oracle) public returns (uint8)`
+
+* This function can only be called by the creator of the secret.
+
+| name | type | detail |
+| :--: | :--: | :--: |
+| secret_hash | bytes32 | The hash of the secret |
+| user | address | The address of the granted oracle |
 
 ##### Return
 
@@ -99,12 +116,12 @@ An oracle framework with zero knowledge proof
 
 #### Compute
 
-`function compute(bytes32 circuit_hash, bytes secret_hashes) public returns (uint8)`
+`function compute(bytes32 circuit_hash, byte32[] secret_hashes) public returns (uint8)`
 
 | name | type | detail |
 | :--: | :--: | :--: |
 | circuit_hash | bytes32 | The hash of the circuit |
-| secret_hashes | bytes | The hashes of the secrets |
+| secret_hashes | byte32[] | The array of secret hashes |
 
 ##### Return
 
