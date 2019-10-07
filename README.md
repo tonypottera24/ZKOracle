@@ -23,18 +23,18 @@ An oracle framework with zero knowledge proof
 
 #### Remove secret 
 
-`function secret_remove(bytes32 secret_hash) public returns (bool)`
+`function secret_remove(bytes32 secret_hash) public returns (uint8)`
 
 * This function can only be called by the creator of the secret.
 
 | name | type | detail |
 | :--: | :--: | :--: |
 | secret_hash | bytes32 | The hash of the secret |
-| return | bool | Success or not |
+| return | uint8 |  |
 
 #### Grant access 
 
-`function secret_grant(bytes32 secret_hash, address user) public returns (bool)`
+`function secret_grant(bytes32 secret_hash, address user) public returns (uint8)`
 
 * This function can only be called by the creator of the secret.
 
@@ -42,7 +42,7 @@ An oracle framework with zero knowledge proof
 | :--: | :--: | :--: |
 | secret_hash | bytes32 | The hash of the secret |
 | user | address | The address of the granted user |
-| return | bool | Success or not |
+| return | uint8 | Success or not |
 
 ### Circuit
 #### Create circuit 
@@ -56,18 +56,18 @@ An oracle framework with zero knowledge proof
 
 #### Remove circuit 
 
-`function circuit_remove(bytes32 circuit_hash) public returns (bool)`
+`function circuit_remove(bytes32 circuit_hash) public returns (uint8)`
 
 * This function can only be called by the creator of the circuit.
 
 | name | type | detail |
 | :--: | :--: | :--: |
 | circuit_hash | bytes32 | The hash of the circuit |
-| return | bool | Success or not |
+| return | uint8 | Success or not |
 
 #### Grant access 
 
-`function circuit_grant(bytes32 secret_hash, address user) public returns (bool)`
+`function circuit_grant(bytes32 secret_hash, address user) public returns (uint8)`
 
 * This function can only be called by the creator of the circuit.
 
@@ -75,4 +75,11 @@ An oracle framework with zero knowledge proof
 | :--: | :--: | :--: |
 | circuit_hash | bytes32 | The hash of the circuit |
 | user | address | The address of the granted user |
-| return | bool | Success or not |
+| return | uint8 | Success or not |
+
+### Return value
+
+| name | detail |
+| :--: | :--: |
+| SUCCESS | The operation successfully |
+| EACCESS |  |
