@@ -12,79 +12,87 @@ An oracle framework with zero knowledge proof
 
 ## Usages
 
+### Oracle
+
+#### Register
+Register as an oracle with deposit.
+
+`function oracle_register(bool TEE, bool MPC) public`
+
+> Note: 
+> * The address which sends this message all will become the owner of this oracle.
+
+| name | type | detail |
+| :-- | :-- | :-- |
+| TEE | `bool` | The oracle use trusted execution environment |
+| MPC | `bool` | The oracle use multi-party computation |
+
+#### Unregister
+Unregister from the oracle list and return the deposits.
+
+`function oracle_unregister() public`
+
+> Note: 
+> * Only the owner of the oracle can unregister itself.
+> * User cannot sending any computation request after oracle unregistered.
+> * The locked deposits will only be returned after user remove the secret.
+
+| name | type | detail |
+| :-- | :-- | :-- |
+
 ### Secret
 
-#### Create secret
+#### Save secret
+Save a secret into oracles.
 
-`function secret_create(bytes secret, address[] oracle) public returns (uint8, bytes32)`
+`function secret_save(bytes secret, address oracle, bytes proof) public`
 
 | name | type | detail |
 | :-- | :-- | :-- |
-| secret | `bytes` | The secret |
-| oracle | `address[]` | The address of the granted oracle |
+| secret | `bytes` | The encrypted secret |
+| oracle | `address` | The address of the oracle |
+| proof | `bytes` | The zero knowledge proof of the encryption |
 
-##### Return
+#### Delete secret
+Delete a secret from oracles.
 
-| type | detail |
-| :-- | :-- |
-| `uint8` | errno |
-| `bytes32` | `keccak256(secret)` |
+`function secret_delete(bytes32 secret_hash, address oracle) public`
 
-#### Remove secret 
-
-`function secret_remove(bytes32 secret_hash, address[] oracle) public returns (uint8)`
-
-* This function can only be called by the creator of the secret.
+* This function can only be called by the saver of the secret.
 
 | name | type | detail |
 | :-- | :-- | :-- |
 | secret_hash | `bytes32` | The hash of the secret |
-| oracle | `address[]` | The address of the granted oracle |
-
-##### Return
-
-| type | detail |
-| :-- | :-- |
-| `uint8` | errno |
+| oracle | `address` | The address of the oracle |
 
 #### Grant access
+Grant access of a secret for an user to an oracle.
 
-`function secret_grant_user(bytes32 secret_hash, address[] user, address[] oracle) public returns (uint8)`
+`function secret_grant_user(bytes32 secret_hash, address user, address oracle) public`
 
 * This function can only be called by the creator of the secret.
 
 | name | type | detail |
 | :-- | :-- | :-- |
-| secret_hash | `bytes32` | The hash of the secret |
-| user | `address[]` | The address of the granted user |
-| oracle | `address[]` | The address of the granted oracle |
-
-##### Return
-
-| type | detail |
-| :-- | :-- |
-| `uint8` | errno |
+| secret_hash | `bytes32` | The hash of secret |
+| user | `address` | The address of granted user |
+| oracle | `address` | The address of granted oracle |
 
 ### Circuit
 
-#### Create circuit 
+#### Create circuit
+Create circuit.
 
-`function circuit_create(bytes circuit) public returns (uint8, bytes32)`
+`function circuit_create(bytes circuit) public`
 
 | name | type | detail |
 | :-- | :-- | :-- |
 | circuit | `bytes` | The circuit |
 
-##### Return
+#### Remove circuit
+Remove circuit.
 
-| type | detail |
-| :-- | :-- |
-| `uint8` | errno |
-| `bytes32` | `keccak256(circuit)` |
-
-#### Remove circuit 
-
-`function circuit_remove(bytes32 circuit_hash) public returns (uint8)`
+`function circuit_remove(bytes32 circuit_hash) public`
 
 * This function can only be called by the creator of the circuit.
 
@@ -92,56 +100,36 @@ An oracle framework with zero knowledge proof
 | :-- | :-- | :-- |
 | circuit_hash | `bytes32` | The hash of the circuit |
 
-##### Return
-
-| type | detail |
-| :-- | :-- |
-| `uint8` | errno |
-
 ### Compute
 
-#### Compute
+#### Compute Request
+Request an oracle to compute a circuit based on secrets.
 
-`function compute(bytes32 circuit_hash, byte32[] secret_hashes) public returns (uint8)`
+`function compute_request(bytes32 circuit_hash, byte32[] secret_hashes, address oracle) public`
 
 | name | type | detail |
 | :-- | :-- | :-- |
 | circuit_hash | `bytes32` | The hash of the circuit |
 | secret_hashes | `byte32[]` | The array of secret hashes |
+| oracle | `address` | The address of oracle |
+
+#### Compute Reply
+
+`function compute_reply(bytes32 circuit_hash, byte32[] secret_hashes, address user, bytes proof, bytes result) public returns (uint8)`
+
+| name | type | detail |
+| :-- | :-- | :-- |
+| circuit_hash | `bytes32` | The hash of the circuit |
+| secret_hashes | `byte32[]` | The array of secret hashes |
+| user | `address` | The address of user |
+| proof | `bytes` | The zero knowledge proof |
+| result | `bytes` | The results |
 
 ##### Return
 
 | type | detail |
 | :-- | :-- |
 | `uint8` | Success or not |
-
-### Oracle
-
-#### Register
-
-`function oracle_register() public returns (uint8)`
-
-| name | type | detail |
-| :-- | :-- | :-- |
-
-##### Return
-
-| type | detail |
-| :-- | :-- |
-| `uint8` | errno |
-
-#### Retire
-
-`function oracle_retire() public returns (uint8)`
-
-| name | type | detail |
-| :-- | :-- | :-- |
-
-##### Return
-
-| type | detail |
-| :-- | :-- |
-| `uint8` | errno |
 
 ### Return values
 
