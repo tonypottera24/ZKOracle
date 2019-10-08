@@ -42,7 +42,7 @@ Unregister from the oracle list and return the deposits.
 #### Create secret
 Create a secret on an oracle.
 
-`function secret_create(bytes secret, address oracle, bytes proof) public`
+`function secret_create(string secret_key, byte32 secret_hash, address oracle, bytes proof) public`
 
 * The address which sends this message will become the owner of this secret.
 
@@ -50,14 +50,15 @@ Create a secret on an oracle.
 
 | name | type | detail |
 | :-- | :-- | :-- |
-| secret | `bytes` | The encrypted secret |
+| secret_key | `string` | The key to access the encrypted secret |
+| secret_hash | `bytes32` | The hash of the secret |
 | oracle | `address` | The address of the oracle |
 | proof | `bytes` | The zero knowledge proof of the encryption |
 
 #### Remove secret
 Remove a secret from an oracle.
 
-`function secret_remove(bytes32 secret_key, address oracle) public`
+`function secret_remove(bytes32 secret_hash, address oracle) public`
 
 * This function can only be called by the owner of the secret.
 
@@ -65,13 +66,13 @@ Remove a secret from an oracle.
 
 | name | type | detail |
 | :-- | :-- | :-- |
-| secret_key | `bytes32` | The keccak256 hash of the secret |
+| secret_hash | `bytes32` | The hash of the secret |
 | oracle | `address` | The address of the oracle |
 
 #### Grant access
 Grant access of a secret for an user on an oracle.
 
-`function secret_grant_user(bytes32 secret_key, address user, address oracle) public`
+`function secret_grant_user(bytes32 secret_hash, address user, address oracle) public`
 
 * This function can only be called by the owner of the secret.
 
@@ -79,7 +80,7 @@ Grant access of a secret for an user on an oracle.
 
 | name | type | detail |
 | :-- | :-- | :-- |
-| secret_key | `bytes32` | The keccak256 hash of the secret |
+| secret_hash | `bytes32` | The hash of the secret |
 | user | `address` | The address of granted user |
 | oracle | `address` | The address of granted oracle |
 
@@ -88,7 +89,7 @@ Grant access of a secret for an user on an oracle.
 #### Create circuit
 Create a circuit on an oracle.
 
-`function circuit_create(bytes32 circuit_key, address oracle) public`
+`function circuit_create(string circuit_key, byte32 circuit_hash, address oracle) public`
 
 * The address which sends this message will become the owner of this circuit.
 
@@ -96,13 +97,14 @@ Create a circuit on an oracle.
 
 | name | type | detail |
 | :-- | :-- | :-- |
-| circuit_key | `bytes32` | The keccak256 hash of the circuit |
+| circuit_key | `string` | The key to access the encrypted circuit |
+| circuit_hash | `bytes32` | The hash of the circuit |
 | oracle | `address` | The address of the oracle |
 
 #### Remove circuit
 Remove a circuit from an oracle.
 
-`function circuit_remove(bytes32 circuit_key, address oracle) public`
+`function circuit_remove(bytes32 circuit_hash, address oracle) public`
 
 * This function can only be called by the owner of the circuit.
 
@@ -110,7 +112,7 @@ Remove a circuit from an oracle.
 
 | name | type | detail |
 | :-- | :-- | :-- |
-| circuit_key | `bytes32` | The keccak256 hash of the circuit |
+| circuit_hash | `bytes32` | The hash of the circuit |
 | oracle | `address` | The address of the oracle |
 
 ### Computation
@@ -118,14 +120,15 @@ Remove a circuit from an oracle.
 #### Computation Request
 Request an oracle to compute a circuit based on secrets.
 
-`function computation_request(bytes32 circuit_hash, byte32[] secret_keys, uint32[] public_input, address oracle) public returns (bytes32)`
+`function computation_request(bytes32 circuit_hash, byte32[] secret_hashes, uint32[] public_inputs, address oracle) public returns (bytes32)`
 
 ##### Parameters
 
 | name | type | detail |
 | :-- | :-- | :-- |
-| circuit_key | `bytes32` | The keccak256 hash of the circuit |
-| secret_keys | `bytes32[]` | The keccak256 hashes of the secrets |
+| circuit_hash | `bytes32` | The hash of the circuit |
+| secret_hashes | `bytes32[]` | The hashes of the secrets |
+| public_inputs | `uint32[]` | The public inputs |
 | oracle | `address` | The address of oracle |
 
 ##### Return Value
@@ -136,14 +139,15 @@ Request an oracle to compute a circuit based on secrets.
 
 #### Computation Reply
 
-`function computation_reply(byte32 request_key, bytes result, bytes proof) public`
+`function computation_reply(byte32 request_key, string result_key, byte32 result_hash, bytes proof) public`
 
 ##### Parameters
 
 | name | type | detail |
 | :-- | :-- | :-- |
 | request_key | `bytes32` | The request key |
-| result | `bytes` | The result |
+| result_key | `string` | The key to access the encrypted result |
+| result_hash | `bytes32` | The hash of the result |
 | proof | `bytes` | The zero knowledge proof |
 
 <!--
