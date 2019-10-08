@@ -51,7 +51,7 @@ Create a secret on an oracle.
 | proof | `bytes` | The zero knowledge proof of the encryption |
 
 #### Remove secret
-Remove a secret from the oracle.
+Remove a secret from an oracle.
 
 `function secret_remove(bytes32 secret_key, address oracle) public`
 
@@ -78,28 +78,30 @@ Grant access of a secret for an user on an oracle.
 ### Circuit
 
 #### Create circuit
-Create circuit.
+Create a circuit on an oracle.
 
-`function circuit_create(bytes32 circuit_key) public returns (bytes32)`
+`function circuit_create(bytes32 circuit_key, address oracle) public`
 
 * The address which sends this message will become the owner of this circuit.
 
 | name | type | detail |
 | :-- | :-- | :-- |
-| circuit | `bytes` | The circuit |
+| circuit_key | `bytes32` | The keccak256 hash of the circuit |
+| oracle | `address` | The address of the oracle |
 
 #### Remove circuit
-Remove circuit.
+Remove a circuit from an oracle.
 
-`function circuit_remove(bytes32 circuit_key) public`
+`function circuit_remove(bytes32 circuit_key, address oracle) public`
 
 * This function can only be called by the owner of the circuit.
 
 | name | type | detail |
 | :-- | :-- | :-- |
 | circuit_key | `bytes32` | The keccak256 hash of the circuit |
+| oracle | `address` | The address of the oracle |
 
-### Compute
+### Computation
 
 #### Compute Request
 Request an oracle to compute a circuit based on secrets.
@@ -114,7 +116,7 @@ Request an oracle to compute a circuit based on secrets.
 
 #### Compute Reply
 
-`function compute_reply(bytes32 circuit_hash, byte32[] secret_hashes, address user, bytes proof, bytes result) public returns (uint8)`
+`function compute_reply(bytes32 circuit_hash, byte32[] secret_hashes, address user, bytes proof, bytes result) public`
 
 | name | type | detail |
 | :-- | :-- | :-- |
@@ -124,15 +126,17 @@ Request an oracle to compute a circuit based on secrets.
 | proof | `bytes` | The zero knowledge proof |
 | result | `bytes` | The results |
 
-##### Return
-
-| type | detail |
-| :-- | :-- |
-| `uint8` | Success or not |
-
+<!--
 ### Return values
 
 | name | detail |
 | :-- | :-- |
 | SUCCESS | The operation successfully |
 | EACCESS |  |
+
+##### Return
+
+| type | detail |
+| :-- | :-- |
+| `uint8` | Success or not |
+-->
