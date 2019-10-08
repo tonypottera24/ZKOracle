@@ -115,10 +115,10 @@ Remove a circuit from an oracle.
 
 ### Computation
 
-#### Compute Request
+#### Computation Request
 Request an oracle to compute a circuit based on secrets.
 
-`function compute_request(bytes32 circuit_hash, byte32[] secret_keys, uint32[] public_input, address oracle) public returns (bytes32)`
+`function computation_request(bytes32 circuit_hash, byte32[] secret_keys, uint32[] public_input, address oracle) public returns (bytes32)`
 
 ##### Parameters
 
@@ -134,9 +134,9 @@ Request an oracle to compute a circuit based on secrets.
 | :-- | :-- |
 | `bytes32` | The request key |
 
-#### Compute Reply
+#### Computation Reply
 
-`function compute_reply(byte32 request_key, bytes result, bytes proof) public`
+`function computation_reply(byte32 request_key, bytes result, bytes proof) public`
 
 ##### Parameters
 
