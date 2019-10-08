@@ -106,25 +106,29 @@ Remove a circuit from an oracle.
 #### Compute Request
 Request an oracle to compute a circuit based on secrets.
 
-`function compute_request(bytes32 circuit_hash, byte32[] secret_hashes, address oracle) public`
+`function compute_request(bytes32 circuit_hash, byte32[] secret_keys, uint32[] public_input, address oracle) public returns (bytes32)`
 
 | name | type | detail |
 | :-- | :-- | :-- |
-| circuit_hash | `bytes32` | The hash of the circuit |
-| secret_hashes | `byte32[]` | The array of secret hashes |
+| circuit_key | `bytes32` | The keccak256 hash of the circuit |
+| secret_keys | `bytes32[]` | The keccak256 hashes of the secrets |
 | oracle | `address` | The address of oracle |
+
+##### Return
+
+| type | detail |
+| :-- | :-- |
+| `bytes32` | The request key |
 
 #### Compute Reply
 
-`function compute_reply(bytes32 circuit_hash, byte32[] secret_hashes, address user, bytes proof, bytes result) public`
+`function compute_reply(byte32 request_key, bytes result, bytes proof) public`
 
 | name | type | detail |
 | :-- | :-- | :-- |
-| circuit_hash | `bytes32` | The hash of the circuit |
-| secret_hashes | `byte32[]` | The array of secret hashes |
-| user | `address` | The address of user |
+| request_key | `bytes32` | The request key |
+| result | `bytes` | The result |
 | proof | `bytes` | The zero knowledge proof |
-| result | `bytes` | The results |
 
 <!--
 ### Return values
