@@ -69,10 +69,10 @@ Remove a secret from an oracle.
 | secret_hash | `bytes32` | The hash of the secret |
 | oracle | `address` | The address of the oracle |
 
-#### Grant access
+#### Grant secret for user
 Grant access of a secret for an user on an oracle.
 
-`function secret_grant_user(bytes32 secret_hash, address user, address oracle) public`
+`function grant_secret_for_user(bytes32 secret_hash, address user, address oracle) public`
 
 * This function can only be called by the owner of the secret.
 
@@ -82,6 +82,22 @@ Grant access of a secret for an user on an oracle.
 | :-- | :-- | :-- |
 | secret_hash | `bytes32` | The hash of the secret |
 | user | `address` | The address of granted user |
+| oracle | `address` | The address of granted oracle |
+
+#### Grant secret on circuit
+Grant usage of a secret for the i'th parameter circuit on an oracle.
+
+`function grant_secret_on_circuit(bytes32 secret_hash, bytes32 circuit_hash, uint32 i, address oracle) public`
+
+* This function can only be called by the owner of the secret.
+
+##### Parameters
+
+| name | type | detail |
+| :-- | :-- | :-- |
+| secret_hash | `bytes32` | The hash of the secret |
+| circuit_hash | `bytes32` | The hash of the circuit |
+| i | `uint32` | The i'th parameter |
 | oracle | `address` | The address of granted oracle |
 
 ### Circuit
